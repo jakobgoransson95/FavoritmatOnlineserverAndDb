@@ -32,9 +32,13 @@ class Favoritmat extends React.Component {
   }
 
   async componentDidMount() {
-    // const all = await db.recept.toArray()
-    const all = await db.recept.orderBy('betyg').reverse().toArray()
-    this.setState({ allaRecept: all })
+    fetch('https://node-express-verceltest-git-master-jakobgoransson95.vercel.app/allinfo')
+      .then(response => response.json())
+      .then(data => {
+        this.setState({
+          allaRecept: data,
+        })
+      })
   }
 
   showBox = (x) => {
@@ -55,17 +59,22 @@ class Favoritmat extends React.Component {
   }
   send = async (x) => {
     const betyg = Number(this.state.betyg)
-    await db.recept.add({
-      maträtt: this.state.maträtt,
-      recept: this.state.recept,
-      kommentar: this.state.kommentar,
-      betyg: betyg,
-      namn: this.state.namn,
-      datum: new Date()
-    });
-    this.setState({ add: false })
-    this.componentDidMount()
-  };
+    fetch('https://node-express-verceltest-git-master-jakobgoransson95.vercel.app/allinfo', {
+      method: 'post',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        maträtt: this.state.maträtt,
+        recept: this.state.recept,
+        kommentar: this.state.kommentar,
+        betyg: betyg,
+        namn: this.state.namn
+      })
+    })
+      .then(this.setState({ add: false, prio: '' }))
+      .catch(error => alert('Server is down'))
+      .then(d => this.componentDidMount())
+  }
+
 
   updateState = (x) => {
     this.setState({ [x.target.id]: x.target.value })
@@ -73,8 +82,12 @@ class Favoritmat extends React.Component {
 
   delete = (x) => {
     const id = Number(x.target.id)
-    db.recept.delete(id)
-    this.componentDidMount()
+    fetch('https://node-express-verceltest-git-master-jakobgoransson95.vercel.app/allinfo/'
+      + x.target.id, {
+      method: 'DELETE',
+    })
+      .then(res => res.json()) // or res.json()
+      .then(d => this.componentDidMount())
   }
 
   visaTaBort = (x) => {
