@@ -4,13 +4,18 @@
 }
 
 #rubrik {
-  display: flex;
+  display: grid;
   justify-self: center;
   font-weight: 500;
-  font-size: 500%;
+  font-size: 8vh;
   font-family: 'Times New Roman', Times, serif;
   text-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   width: 100%;
+  grid-column: 1;
+}
+
+#rubriktext {
+  grid-row: 1;
 }
 
 #innerGrid {
@@ -33,10 +38,10 @@
 }
 
 #add {
-  width: 3%;
-  left: 10px;
-  margin-right: 37%;
+  width: 4vh;
+  left: 1vh;
   cursor: pointer;
+  grid-row: 1;
 }
 
 #add:hover {
@@ -134,7 +139,7 @@
   cursor: pointer;
   justify-self: left;
   grid-row: 1;
-  font-size: 200%;
+  font-size: 3vh;
   position: absolute;
 }
 
@@ -142,7 +147,7 @@
   justify-self: center;
   border: none;
   grid-row: 1;
-  font-size: 300%;
+  font-size: 3vh;
   font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
@@ -172,14 +177,14 @@
 
 #serchPlanering {
   grid-row: 1;
-  width: 5em;
-  height: 5%;
+  width: 10vh;
+  height: 4vh;
   border-radius: 10px;
   background-color: transparent;
   font-weight: 400;
   font-size: 30%;
   margin-top: 2.3%;
-  right: 10px;
+  right: 2px;
   position: absolute
 }
 

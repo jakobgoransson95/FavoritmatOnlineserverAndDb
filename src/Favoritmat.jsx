@@ -106,7 +106,7 @@ class Favoritmat extends React.Component {
     return (
       <div className='hela'>
         <div id='rubrik'><BiMessageAdd id='add' onClick={this.showBox} />
-          Favoritmat
+          <div id='rubriktext'>Favoritmat</div>
           <input id='serchPlanering'
             placeholder='Sök'
             onChange={(x) => this.setState({ search: x.target.value })} />
