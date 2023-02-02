@@ -37,6 +37,11 @@
   height: 105%;
 }
 
+.matbox:hover {
+  transform: scale(1.5);
+  transition: 0.2s linear;
+}
+
 #add {
   width: 4vh;
   left: 1vh;
@@ -148,6 +153,7 @@
   border: none;
   grid-row: 1;
   font-size: 3vh;
+  font-weight: bold;
   font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
