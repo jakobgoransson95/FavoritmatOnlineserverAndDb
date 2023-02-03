@@ -32,7 +32,9 @@ class Favoritmat extends React.Component {
       full: '',
       fullinner: '',
       textareafull: '',
-      allaRecept: []
+      allaReceptOrg: [],
+      allaRecept: [],
+      receptId: [],
     }
   }
 
@@ -46,7 +48,7 @@ class Favoritmat extends React.Component {
     })
       .then(response => response.json())
       .then(x => {
-        this.setState({ allaRecept: x })
+        this.setState({ allaRecept: x, allaReceptOrg: x })
       })
       .catch(error => alert('Server is down'))
   }
@@ -103,6 +105,7 @@ class Favoritmat extends React.Component {
 
   visaTaBort = (x) => {
     this.setState({ RutaTaBort: x.target.id })
+    console.log(this.state.receptId)
   }
 
   döljTaBort = (x) => {
@@ -110,35 +113,60 @@ class Favoritmat extends React.Component {
   }
 
   full = (x) => {
-    const idNr = Number(x.target.id)
-    if (this.state.full !== 'full') {
-      fetch('https://node-express-verceltest-git-master-jakobgoransson95.vercel.app/id/', {
-        method: 'put',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          id: idNr,
-        })
+    // const idNr = Number(x.target.id)
+    // if (this.state.full !== 'full') {
+    //   fetch('https://node-express-verceltest-git-master-jakobgoransson95.vercel.app/id/', {
+    //     method: 'put',
+    //     headers: { 'Content-Type': 'application/json' },
+    //     body: JSON.stringify({
+    //       id: idNr,
+    //     })
+    //   })
+    //     .then(response => response.json())
+    //     .then(x => {
+    //       this.setState({ allaRecept: x })
+    //     })
+    //     .then(this.setState({
+    //       full: 'full',
+    //       fullinner: 'fullinner',
+    //       textareafull: 'textareafull'
+    //     }))
+    //     .catch(error => alert('API server is down'))
+    // }
+    // if (this.state.full === 'full') {
+    //   this.setState({ full: '', fullinner: '' })
+    //   this.componentDidMount()
+    // }
+    if (this.state.full === '') {
+      this.state.allaRecept.map((list) => {
+        const listNr = Number(list.id)
+        const xNr = Number(x.target.id)
+        if (listNr === xNr) {
+          let arr = []
+          arr.push(list)
+          this.setState({
+            allaRecept: arr,
+            full: 'full',
+            fullinner: 'fullinner',
+            textareafull: 'textareafull'
+          })
+        }
       })
-        .then(response => response.json())
-        .then(x => {
-          this.setState({ allaRecept: x })
-        })
-        .then(this.setState({
-          full: 'full',
-          fullinner: 'fullinner',
-          textareafull: 'textareafull'
-        }))
-        .catch(error => alert('API server is down'))
-    }
-    if (this.state.full === 'full') {
-      this.setState({ full: '', fullinner: '' })
+    } else {
+      this.setState({
+        allaRecept: this.state.allaReceptOrg,
+        full: '',
+        fullinner: '',
+        textareafull: ''
+      })
       this.componentDidMount()
     }
   }
 
   render() {
     const { add, allaRecept, search, RutaTaBort } = this.state;
-    const filteredRecept = allaRecept.filter(message => {
+    const reverseRecept = allaRecept.reverse()
+    const filteredRecept = reverseRecept.filter(message => {
       return message.maträtt.toLowerCase().includes(search.toLowerCase());
     });
     return (
