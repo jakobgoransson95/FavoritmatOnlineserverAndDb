@@ -28,6 +28,10 @@ class Favoritmat extends React.Component {
       betyg: '',
       search: '',
       RutaTaBort: '',
+      fullscreen: false,
+      full: '',
+      fullinner: '',
+      textareafull: '',
       allaRecept: []
     }
   }
@@ -46,6 +50,7 @@ class Favoritmat extends React.Component {
       })
       .catch(error => alert('Server is down'))
   }
+
 
   showBox = (x) => {
     this.setState({ add: true })
@@ -104,6 +109,33 @@ class Favoritmat extends React.Component {
     this.setState({ RutaTaBort: '' })
   }
 
+  full = (x) => {
+    const idNr = Number(x.target.id)
+    if (this.state.full !== 'full') {
+      fetch('https://node-express-verceltest-git-master-jakobgoransson95.vercel.app/id/', {
+        method: 'put',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          id: idNr,
+        })
+      })
+        .then(response => response.json())
+        .then(x => {
+          this.setState({ allaRecept: x })
+        })
+        .then(this.setState({
+          full: 'full',
+          fullinner: 'fullinner',
+          textareafull: 'textareafull'
+        }))
+        .catch(error => alert('API server is down'))
+    }
+    if (this.state.full === 'full') {
+      this.setState({ full: '', fullinner: '' })
+      this.componentDidMount()
+    }
+  }
+
   render() {
     const { add, allaRecept, search, RutaTaBort } = this.state;
     const filteredRecept = allaRecept.filter(message => {
@@ -140,46 +172,50 @@ class Favoritmat extends React.Component {
         <div id='innerGrid'>
           {filteredRecept.map((helaListan, i) =>
             <div className='matbox' key={i} >
-              <div id='removeMaträtt'> <CiCircleRemove
-                id={helaListan.id}
-                onClick={this.visaTaBort}
-                className='remove' />
-                <BsArrowsFullscreen className='fullscreen' id={helaListan.id}
-                  onClick={(x) => this.setState({ fullscreen: x.target.value })} />
-                {Number(RutaTaBort) === helaListan.id && <div id='rutaTaBortPlanering'>
-                  <p id='TaBortTextPlanering' >Vill du ta bort?</p>
-                  <p onClick={this.delete}
-                    className='TaBortJaPlanering'
-                    id={helaListan.id}>Ja</p>
-                  <p onClick={this.döljTaBort}
-                    className='TaBortJaPlanering'>Nej</p>
-                </div>}
-                <div id='maträtt2'>{helaListan.maträtt}</div>
-              </div>
-              <div id='gridinner'>
-                <div className='inner' id='receptinner'>
-                  <div className='rubrikinner'>Recept / länk</div>
-                  <textarea className='textArea' value={helaListan.recept} readOnly={true} />
+              <div className={this.state.full}>
+                <div id='removeMaträtt'> <CiCircleRemove
+                  id={helaListan.id}
+                  onClick={this.visaTaBort}
+                  className='remove' />
+                  <BsArrowsFullscreen className='fullscreen' id={helaListan.id}
+                    onClick={this.full} />
+                  {Number(RutaTaBort) === helaListan.id && <div id='rutaTaBortPlanering'>
+                    <p id='TaBortTextPlanering' >Vill du ta bort?</p>
+                    <p onClick={this.delete}
+                      className='TaBortJaPlanering'
+                      id={helaListan.id}>Ja</p>
+                    <p onClick={this.döljTaBort}
+                      className='TaBortJaPlanering'>Nej</p>
+                  </div>}
+                  <div id='maträtt2'>{helaListan.maträtt}</div>
                 </div>
-                <div className='inner' id='kommentarinner'>
-                  <div className='rubrikinner'>kommentar</div>
-                  <textarea className='textArea' value={helaListan.kommentar} readOnly={true} />
+                <div >
+                  <div id={this.state.fullinner}>
+                    <div className='inner' id='receptinner'>
+                      <div className='rubrikinner'>Recept / länk</div>
+                      <textarea id={this.state.textareafull} className='textArea' value={helaListan.recept} readOnly={true} />
+                    </div>
+                    <div className='inner' id='kommentarinner'>
+                      <div className='rubrikinner'>kommentar</div>
+                      <textarea className='textArea' id={this.state.textareafull} value={helaListan.kommentar} readOnly={true} />
+                    </div>
+                    <div className='inner' id='betyginner'>
+                      <div className='rubrikinner'>Betyg</div>
+                      <div id={this.state.textareafull} >{helaListan.betyg} /10</div>
+                    </div>
+                    <div className='inner' id='namninner'>
+                      <div className='rubrikinner'>Namn</div>
+                      <div id={this.state.textareafull} className='textArea'>{helaListan.namn}</div>
+                    </div>
+                    <div id='newdate'> {moment(helaListan.datum).format("DD MMMM YYYY")}{" "}</div>
+                  </div>
                 </div>
-                <div className='inner' id='betyginner'>
-                  <div className='rubrikinner'>Betyg</div>
-                  <div>{helaListan.betyg} /10</div>
-                </div>
-                <div className='inner' id='namninner'>
-                  <div className='rubrikinner'>Namn</div>
-                  <textarea className='textArea' value={helaListan.namn} readOnly={true} />
-                </div>
-                <div id='newdate'> {moment(helaListan.datum).format("DD MMMM YYYY")}{" "}</div>
               </div>
             </div>
           )}
 
         </div>
-      </div>
+      </div >
     );
   }
 }

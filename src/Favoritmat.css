@@ -16,17 +16,17 @@
 
 #rubriktext {
   grid-row: 1;
+  justify-self: center;
+  grid-column: span 2;
 }
 
 #innerGrid {
   display: grid;
-  grid-template-columns: 50% 50%;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 100fr));
   text-align: center;
-  margin-left: 10px;
-  margin-right: 10px;
   margin-bottom: 10px;
-  gap: 2em;
-
+  gap: 3em;
+  margin-left: 0.5vh;
 }
 
 .matbox {
@@ -37,21 +37,27 @@
   height: 105%;
 }
 
-.matboxx:hover {
-  transform: scale(1.5);
+.full {
   transition: 0.2s linear;
   position: fixed;
-  left: 100vh;
-  top: 50vh;
-  transform: translate(-75vh, -50vh);
-  width: 150vh;
+  left: 5%;
+  top: 2%;
+  width: 90%;
+  height: 80%;
+  background-color: rgb(216, 220, 218);
+  border-radius: 5px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  margin-top: 10px;
 }
+
+
 
 #add {
   width: 4vh;
   left: 1vh;
   cursor: pointer;
-  grid-row: 1;
+  grid-row: 2;
+  margin-top: 13%;
 }
 
 #add:hover {
@@ -142,15 +148,17 @@
 #removeMaträtt {
   display: grid;
   text-align: center;
-  grid-template-columns: 100%
+  grid-template-columns: 100%;
+  height: 7vh;
 }
 
 .remove {
   cursor: pointer;
   justify-self: left;
+  top: 1px;
   grid-row: 1;
   font-size: 3vh;
-  position: absolute;
+  margin-top: -2px;
 }
 
 .remove:hover {
@@ -171,21 +179,46 @@
   transform: scale(1.1);
 }
 
+
+
 #maträtt2 {
   justify-self: center;
-  border: none;
-  grid-row: 1;
+  border-radius: 10px;
+  margin-top: 3px;
   font-size: 3vh;
   font-weight: bold;
   font-family: Georgia, 'Times New Roman', Times, serif;
+  position: absolute;
 }
 
 #gridinner {
   display: grid;
   grid-template-columns: 48% 48%;
-  height: 10em;
+  height: 12em;
   margin-top: 20px;
   gap: 2%;
+  margin-top: 0px;
+}
+
+#fullinner {
+  display: grid;
+  grid-template-columns: 48% 48%;
+  height: 48em;
+  margin-top: 20px;
+  gap: 2%;
+  margin-top: 0px;
+}
+
+.rubrikinner {
+  font-weight: bold;
+  margin-top: 2%;
+  font-size: 150%
+}
+
+#textareafull {
+  height: 80%;
+  font-size: 150%;
+
 }
 
 .inner {
@@ -194,18 +227,19 @@
   margin: 2%;
 }
 
-.rubrikinner {
-  font-weight: bold;
-  margin-bottom: 2%;
-}
+
 
 #newdate {
   justify-self: left;
-  margin-left: 3%;
+  margin-left: 10px;
+  text-align: left;
+  width: 200%;
+  font-size: 1.5vh;
+  margin-top: 3vh;
 }
 
 #serchPlanering {
-  grid-row: 1;
+  grid-row: 2;
   width: 10vh;
   height: 4vh;
   border-radius: 10px;
@@ -213,8 +247,8 @@
   font-weight: 400;
   font-size: 30%;
   margin-top: 2.3%;
-  right: 2px;
-  position: absolute
+  justify-self: right;
+  margin-top: 15%;
 }
 
 .textArea {
