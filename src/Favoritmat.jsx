@@ -2,7 +2,6 @@ import React from 'react';
 import './Favoritmat.css';
 import { BiMessageAdd } from "react-icons/bi";
 import Dexie from 'dexie';
-import Select from 'react-select'
 import { CiCircleRemove } from "react-icons/ci";
 import { BsArrowsFullscreen } from "react-icons/bs";
 import moment from 'moment/moment';
