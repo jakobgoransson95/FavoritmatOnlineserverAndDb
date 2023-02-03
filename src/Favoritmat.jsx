@@ -4,6 +4,7 @@ import { BiMessageAdd } from "react-icons/bi";
 import Dexie from 'dexie';
 import Select from 'react-select'
 import { CiCircleRemove } from "react-icons/ci";
+import { BsArrowsFullscreen } from "react-icons/bs";
 import moment from 'moment/moment';
 
 
@@ -32,13 +33,18 @@ class Favoritmat extends React.Component {
   }
 
   async componentDidMount() {
-    fetch('https://node-express-verceltest-git-master-jakobgoransson95.vercel.app/allinfo')
-      .then(response => response.json())
-      .then(data => {
-        this.setState({
-          allaRecept: data,
-        })
+    fetch('https://node-express-verceltest-git-master-jakobgoransson95.vercel.app/allinfo', {
+      method: 'put',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        id: 2,
       })
+    })
+      .then(response => response.json())
+      .then(x => {
+        this.setState({ allaRecept: x })
+      })
+      .catch(error => alert('Server is down'))
   }
 
   showBox = (x) => {
@@ -138,6 +144,8 @@ class Favoritmat extends React.Component {
                 id={helaListan.id}
                 onClick={this.visaTaBort}
                 className='remove' />
+                <BsArrowsFullscreen className='fullscreen' id={helaListan.id}
+                  onClick={(x) => this.setState({ fullscreen: x.target.value })} />
                 {Number(RutaTaBort) === helaListan.id && <div id='rutaTaBortPlanering'>
                   <p id='TaBortTextPlanering' >Vill du ta bort?</p>
                   <p onClick={this.delete}

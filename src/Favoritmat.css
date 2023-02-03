@@ -37,9 +37,14 @@
   height: 105%;
 }
 
-.matbox:hover {
+.matboxx:hover {
   transform: scale(1.5);
   transition: 0.2s linear;
+  position: fixed;
+  left: 100vh;
+  top: 50vh;
+  transform: translate(-75vh, -50vh);
+  width: 150vh;
 }
 
 #add {
@@ -146,6 +151,24 @@
   grid-row: 1;
   font-size: 3vh;
   position: absolute;
+}
+
+.remove:hover {
+  transform: scale(1.1);
+}
+
+.fullscreen {
+  cursor: pointer;
+  justify-self: right;
+  grid-row: 1;
+  font-size: 2vh;
+  position: relative;
+  grid-column: 2;
+  right: 2vh
+}
+
+.fullscreen:hover {
+  transform: scale(1.1);
 }
 
 #maträtt2 {
