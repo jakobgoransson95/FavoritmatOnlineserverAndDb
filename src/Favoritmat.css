@@ -30,7 +30,7 @@
 }
 
 .matbox {
-  background-color: rgb(216, 220, 218);
+  background: linear-gradient(89deg, #FFFFE0 0%, #d2f3dd 100%);
   border-radius: 5px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   margin-top: 10px;
@@ -38,19 +38,13 @@
 }
 
 .full {
-  /* transition: 1.2s linear; */
+  transition: 1.2s linear;
   transition: all 1.75s ease;
   transform: translateX(0) rotate(0deg);
   transition: all .75s ease;
-  position: fixed;
-  left: 5%;
-  top: 2%;
-  width: 90%;
-  height: 80%;
-  background-color: rgb(216, 220, 218);
+
   border-radius: 5px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  margin-top: 10px;
 }
 
 
@@ -68,19 +62,21 @@
 }
 
 #ny {
-  background-color: rgb(216, 220, 218);
+  background: linear-gradient(89deg, #FFFFE0 0%, #d2f3dd 100%);
   display: grid;
-  width: 50%;
-  height: 17em;
+  width: 90%;
+  height: 70%;
   gap: 2%;
   position: absolute;
-  top: 5em;
+  top: 20%;
+  left: 5%;
   border-radius: 10px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
 }
 
 #rubrikNy {
   justify-self: center;
-  font-size: large;
+  font-size: 150%;
   text-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   grid-row: 1;
 }
@@ -175,7 +171,9 @@
   font-size: 2vh;
   position: relative;
   grid-column: 2;
-  right: 2vh
+  right: 2vh;
+  margin-right: 20%;
+  margin-top: 20%;
 }
 
 .fullscreen:hover {

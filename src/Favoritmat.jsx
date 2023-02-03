@@ -6,6 +6,7 @@ import Select from 'react-select'
 import { CiCircleRemove } from "react-icons/ci";
 import { BsArrowsFullscreen } from "react-icons/bs";
 import moment from 'moment/moment';
+import Slide from 'react-reveal/Slide';
 
 
 export const db = new Dexie('myDatabase');
@@ -48,7 +49,7 @@ class Favoritmat extends React.Component {
     })
       .then(response => response.json())
       .then(x => {
-        this.setState({ allaRecept: x, allaReceptOrg: x })
+        this.setState({ allaRecept: x, allaReceptOrg: x, show: this.state.show })
       })
       .catch(error => alert('Server is down'))
   }
@@ -105,7 +106,6 @@ class Favoritmat extends React.Component {
 
   visaTaBort = (x) => {
     this.setState({ RutaTaBort: x.target.id })
-    console.log(this.state.receptId)
   }
 
   döljTaBort = (x) => {
@@ -113,30 +113,6 @@ class Favoritmat extends React.Component {
   }
 
   full = (x) => {
-    // const idNr = Number(x.target.id)
-    // if (this.state.full !== 'full') {
-    //   fetch('https://node-express-verceltest-git-master-jakobgoransson95.vercel.app/id/', {
-    //     method: 'put',
-    //     headers: { 'Content-Type': 'application/json' },
-    //     body: JSON.stringify({
-    //       id: idNr,
-    //     })
-    //   })
-    //     .then(response => response.json())
-    //     .then(x => {
-    //       this.setState({ allaRecept: x })
-    //     })
-    //     .then(this.setState({
-    //       full: 'full',
-    //       fullinner: 'fullinner',
-    //       textareafull: 'textareafull'
-    //     }))
-    //     .catch(error => alert('API server is down'))
-    // }
-    // if (this.state.full === 'full') {
-    //   this.setState({ full: '', fullinner: '' })
-    //   this.componentDidMount()
-    // }
     if (this.state.full === '') {
       this.state.allaRecept.map((list) => {
         const listNr = Number(list.id)
@@ -148,7 +124,7 @@ class Favoritmat extends React.Component {
             allaRecept: arr,
             full: 'full',
             fullinner: 'fullinner',
-            textareafull: 'textareafull'
+            textareafull: 'textareafull',
           })
         }
       })
@@ -157,7 +133,7 @@ class Favoritmat extends React.Component {
         allaRecept: this.state.allaReceptOrg,
         full: '',
         fullinner: '',
-        textareafull: ''
+        textareafull: '',
       })
       this.componentDidMount()
     }
@@ -199,47 +175,51 @@ class Favoritmat extends React.Component {
           </div>}
         <div id='innerGrid'>
           {filteredRecept.map((helaListan, i) =>
-            <div className='matbox' key={i} >
-              <div className={this.state.full}>
-                <div id='removeMaträtt'> <CiCircleRemove
-                  id={helaListan.id}
-                  onClick={this.visaTaBort}
-                  className='remove' />
-                  <BsArrowsFullscreen className='fullscreen' id={helaListan.id}
-                    onClick={this.full} />
-                  {Number(RutaTaBort) === helaListan.id && <div id='rutaTaBortPlanering'>
-                    <p id='TaBortTextPlanering' >Vill du ta bort?</p>
-                    <p onClick={this.delete}
-                      className='TaBortJaPlanering'
-                      id={helaListan.id}>Ja</p>
-                    <p onClick={this.döljTaBort}
-                      className='TaBortJaPlanering'>Nej</p>
-                  </div>}
-                  <div id='maträtt2'>{helaListan.maträtt}</div>
-                </div>
-                <div >
-                  <div id={this.state.fullinner}>
-                    <div className='inner' id='receptinner'>
-                      <div className='rubrikinner'>Recept / länk</div>
-                      <textarea id={this.state.textareafull} className='textArea' value={helaListan.recept} readOnly={true} />
+            <Slide left>
+              <div className='matbox' key={i} >
+                <div className={this.state.full}>
+                  <div id='removeMaträtt'> <CiCircleRemove
+                    id={helaListan.id}
+                    onClick={this.visaTaBort}
+                    className='remove' />
+                    <BsArrowsFullscreen className='fullscreen' id={helaListan.id}
+                      onClick={this.full} />
+                    <Slide left>
+                      {Number(RutaTaBort) === helaListan.id &&
+                        <div id='rutaTaBortPlanering'>
+                          <p id='TaBortTextPlanering' >Vill du ta bort?</p>
+                          <p onClick={this.delete}
+                            className='TaBortJaPlanering'
+                            id={helaListan.id}>Ja</p>
+                          <p onClick={this.döljTaBort}
+                            className='TaBortJaPlanering'>Nej</p>
+                        </div>}</Slide>
+                    <div id='maträtt2'>{helaListan.maträtt}</div>
+                  </div>
+                  <div >
+                    <div id={this.state.fullinner}>
+                      <div className='inner' id='receptinner'>
+                        <div className='rubrikinner'>Recept / länk</div>
+                        <textarea id={this.state.textareafull} className='textArea' value={helaListan.recept} readOnly={true} />
+                      </div>
+                      <div className='inner' id='kommentarinner'>
+                        <div className='rubrikinner'>kommentar</div>
+                        <textarea className='textArea' id={this.state.textareafull} value={helaListan.kommentar} readOnly={true} />
+                      </div>
+                      <div className='inner' id='betyginner'>
+                        <div className='rubrikinner'>Betyg</div>
+                        <div id={this.state.textareafull} >{helaListan.betyg} /10</div>
+                      </div>
+                      <div className='inner' id='namninner'>
+                        <div className='rubrikinner'>Namn</div>
+                        <div id={this.state.textareafull} className='textArea'>{helaListan.namn}</div>
+                      </div>
+                      <div id='newdate'> {moment(helaListan.datum).format("DD MMMM YYYY")}{" "}</div>
                     </div>
-                    <div className='inner' id='kommentarinner'>
-                      <div className='rubrikinner'>kommentar</div>
-                      <textarea className='textArea' id={this.state.textareafull} value={helaListan.kommentar} readOnly={true} />
-                    </div>
-                    <div className='inner' id='betyginner'>
-                      <div className='rubrikinner'>Betyg</div>
-                      <div id={this.state.textareafull} >{helaListan.betyg} /10</div>
-                    </div>
-                    <div className='inner' id='namninner'>
-                      <div className='rubrikinner'>Namn</div>
-                      <div id={this.state.textareafull} className='textArea'>{helaListan.namn}</div>
-                    </div>
-                    <div id='newdate'> {moment(helaListan.datum).format("DD MMMM YYYY")}{" "}</div>
                   </div>
                 </div>
               </div>
-            </div>
+            </Slide>
           )}
 
         </div>
