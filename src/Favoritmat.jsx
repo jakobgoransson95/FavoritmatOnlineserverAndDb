@@ -156,7 +156,7 @@ class Favoritmat extends React.Component {
   }
 
   render() {
-    const { add, allaRecept, allaReceptOrg, search, RutaTaBort } = this.state;
+    const { add, allaRecept, search, RutaTaBort } = this.state;
     const filteredRecept = allaRecept.filter(message => {
       return message.maträtt.toLowerCase().includes(search.toLowerCase());
     });
@@ -237,7 +237,7 @@ class Favoritmat extends React.Component {
                       </div>
                       <div className='inner' id='namninner'>
                         <div className='rubrikinner'>Namn</div>
-                        <div id={this.state.textareafull} className='textArea'>{helaListan.namn}</div>
+                        <div id={this.state.textareafull} >{helaListan.namn}</div>
                       </div>
                       <div id='newdate'> {moment(helaListan.datum).format("DD MMMM YYYY")}{" "}</div>
                     </div>
