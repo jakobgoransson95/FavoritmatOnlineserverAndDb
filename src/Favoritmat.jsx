@@ -204,14 +204,14 @@ class Favoritmat extends React.Component {
                     className='remove' />
                     <BsArrowsFullscreen className='fullscreen' id={helaListan.id}
                       onClick={this.full} />
-                    {Number(RutaTaBort) === helaListan.id &&
+                    {1 === 1 &&
                       <FadeIn
                         from="left"
                         positionOffset={400}
                         triggerOffset={200}
                         delayInMilliseconds={0}
                       >
-                        <div id='rutaTaBortPlanering'>
+                        <div className='rutaTaBortPlanering' id={helaListan.id}>
                           <p id='TaBortTextPlanering' >Vill du ta bort?</p>
                           <p onClick={this.delete}
                             className='TaBortJaPlanering'

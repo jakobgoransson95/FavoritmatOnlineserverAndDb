@@ -266,7 +266,7 @@
   border: none;
 }
 
-#rutaTaBortPlanering {
+.rutaTaBortPlanering {
   background: linear-gradient(89deg, #FFFFE0 0%, #d2f3dd 100%);
   height: 5em;
   width: 12em;
