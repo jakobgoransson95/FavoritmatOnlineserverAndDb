@@ -49,7 +49,8 @@ class Favoritmat extends React.Component {
     })
       .then(response => response.json())
       .then(x => {
-        this.setState({ allaRecept: x, allaReceptOrg: x, show: this.state.show })
+        const reverseRecept = x.reverse()
+        this.setState({ allaRecept: reverseRecept, allaReceptOrg: reverseRecept, show: this.state.show })
       })
       .catch(error => alert('Server is down'))
   }
@@ -156,8 +157,7 @@ class Favoritmat extends React.Component {
 
   render() {
     const { add, allaRecept, allaReceptOrg, search, RutaTaBort } = this.state;
-    let reverseRecept = allaRecept.reverse()
-    const filteredRecept = reverseRecept.filter(message => {
+    const filteredRecept = allaRecept.filter(message => {
       return message.maträtt.toLowerCase().includes(search.toLowerCase());
     });
     return (
