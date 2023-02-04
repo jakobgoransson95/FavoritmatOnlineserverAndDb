@@ -169,25 +169,31 @@ class Favoritmat extends React.Component {
             onChange={(x) => this.setState({ search: x.target.value })} />
         </div>
         {add === true &&
-          <div id='ny'>
-            <div id='rubrikNy'>Lägg till ny maträtt</div>
-            <input id='maträtt' placeholder='Namn på maträtt' onChange={this.updateState} />
-            <textarea id='recept' placeholder='Recept / länk' onChange={this.updateState} />
-            <textarea id='kommentar' placeholder='Kommentar' onChange={this.updateState} />
-            <input
-              id='betyg'
-              placeholder='Betyg 1-10'
-              type='number'
-              min='1'
-              max='10'
-              onChange={this.updateState}
-            />
-            <input id='namn' placeholder='Ditt namn' onChange={this.updateState} />
-            <div id='välj'>
-              <span className='send' onClick={this.send}>Send</span>
-              <span className='send' onClick={this.hideBox}>Exit</span>
-            </div>
-          </div>}
+          <FadeIn
+            from="bottom"
+            positionOffset={400}
+            triggerOffset={200}
+            delayInMilliseconds={0}
+          >
+            <div id='ny'>
+              <div id='rubrikNy'>Lägg till ny maträtt</div>
+              <input id='maträtt' placeholder='Namn på maträtt' onChange={this.updateState} />
+              <textarea id='recept' placeholder='Recept / länk' onChange={this.updateState} />
+              <textarea id='kommentar' placeholder='Kommentar' onChange={this.updateState} />
+              <input
+                id='betyg'
+                placeholder='Betyg 1-10'
+                type='number'
+                min='1'
+                max='10'
+                onChange={this.updateState}
+              />
+              <input id='namn' placeholder='Ditt namn' onChange={this.updateState} />
+              <div id='välj'>
+                <span className='send' onClick={this.send}>Send</span>
+                <span className='send' onClick={this.hideBox}>Exit</span>
+              </div>
+            </div></FadeIn>}
         <div id='innerGrid'>
           {filteredRecept.map((helaListan, i) =>
             <FadeIn

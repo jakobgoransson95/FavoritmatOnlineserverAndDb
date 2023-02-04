@@ -65,7 +65,7 @@
   background: linear-gradient(89deg, #FFFFE0 0%, #d2f3dd 100%);
   display: grid;
   width: 90%;
-  height: 70%;
+  height: 60vh;
   gap: 2%;
   position: absolute;
   top: 20%;
