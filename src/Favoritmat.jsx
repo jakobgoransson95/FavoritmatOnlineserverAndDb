@@ -5,7 +5,8 @@ import Dexie from 'dexie';
 import { CiCircleRemove } from "react-icons/ci";
 import { BsArrowsFullscreen } from "react-icons/bs";
 import moment from 'moment/moment';
-import { FadeIn } from 'react-slide-fade-in'
+import { FadeIn } from 'react-slide-fade-in';
+import { useEffect } from 'react';
 
 
 export const db = new Dexie('myDatabase');
@@ -105,10 +106,25 @@ class Favoritmat extends React.Component {
 
   visaTaBort = (x) => {
     this.setState({ RutaTaBort: x.target.id })
+
+
+    // this.state.allaRecept.map((list) => {
+    //   const listNr = Number(list.id)
+    //   const xNr = Number(x.target.id)
+    //   if (listNr === xNr) {
+    //     let arr = []
+    //     arr.push(list)
+    //     this.setState({
+    //       allaRecept: arr,
+    //       RutaTaBort: x.target.id
+    //     })
+    //   }
+    // })
+
   }
 
   döljTaBort = (x) => {
-    this.setState({ RutaTaBort: '' })
+    this.setState({ RutaTaBort: ''/* , allaRecept: this.state.allaReceptOrg */ })
   }
 
   full = (x) => {
@@ -139,8 +155,8 @@ class Favoritmat extends React.Component {
   }
 
   render() {
-    const { add, allaRecept, search, RutaTaBort } = this.state;
-    const reverseRecept = allaRecept.reverse()
+    const { add, allaRecept, allaReceptOrg, search, RutaTaBort } = this.state;
+    let reverseRecept = allaRecept.reverse()
     const filteredRecept = reverseRecept.filter(message => {
       return message.maträtt.toLowerCase().includes(search.toLowerCase());
     });
@@ -153,7 +169,6 @@ class Favoritmat extends React.Component {
             onChange={(x) => this.setState({ search: x.target.value })} />
         </div>
         {add === true &&
-
           <div id='ny'>
             <div id='rubrikNy'>Lägg till ny maträtt</div>
             <input id='maträtt' placeholder='Namn på maträtt' onChange={this.updateState} />
