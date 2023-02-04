@@ -196,7 +196,7 @@ class Favoritmat extends React.Component {
               triggerOffset={200}
               delayInMilliseconds={0}
             >
-              <div className='matbox' key={i} >
+              <div id={helaListan.id} className='matbox' key={i} >
                 <div className={this.state.full}>
                   <div id='removeMaträtt'> <CiCircleRemove
                     id={helaListan.id}
