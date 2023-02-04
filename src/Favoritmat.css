@@ -275,6 +275,7 @@
   grid-template-columns: 50% 50%;
   border-radius: 10px;
   z-index: 1;
+  position: relative;
 }
 
 #TaBortTextPlanering {
