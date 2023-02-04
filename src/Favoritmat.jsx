@@ -154,7 +154,7 @@ class Favoritmat extends React.Component {
         </div>
         {add === true &&
           <div id='ny'>
-            <div id='rubrikNy'>Lägg till ny maträtt</div>
+            <div id='rubrikNy'>Läggg till ny maträtt</div>
             <input id='maträtt' placeholder='Namn på maträtt' onChange={this.updateState} />
             <textarea id='recept' placeholder='Recept / länk' onChange={this.updateState} />
             <textarea id='kommentar' placeholder='Kommentar' onChange={this.updateState} />
