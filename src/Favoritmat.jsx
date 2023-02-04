@@ -153,6 +153,7 @@ class Favoritmat extends React.Component {
             onChange={(x) => this.setState({ search: x.target.value })} />
         </div>
         {add === true &&
+
           <div id='ny'>
             <div id='rubrikNy'>Lägg till ny maträtt</div>
             <input id='maträtt' placeholder='Namn på maträtt' onChange={this.updateState} />
@@ -188,13 +189,13 @@ class Favoritmat extends React.Component {
                     className='remove' />
                     <BsArrowsFullscreen className='fullscreen' id={helaListan.id}
                       onClick={this.full} />
-                    <FadeIn
-                      from="bottom"
-                      positionOffset={400}
-                      triggerOffset={200}
-                      delayInMilliseconds={0}
-                    >
-                      {Number(RutaTaBort) === helaListan.id &&
+                    {Number(RutaTaBort) === helaListan.id &&
+                      <FadeIn
+                        from="left"
+                        positionOffset={400}
+                        triggerOffset={200}
+                        delayInMilliseconds={0}
+                      >
                         <div id='rutaTaBortPlanering'>
                           <p id='TaBortTextPlanering' >Vill du ta bort?</p>
                           <p onClick={this.delete}
@@ -202,7 +203,7 @@ class Favoritmat extends React.Component {
                             id={helaListan.id}>Ja</p>
                           <p onClick={this.döljTaBort}
                             className='TaBortJaPlanering'>Nej</p>
-                        </div>}</FadeIn>
+                        </div> </FadeIn>}
                     <div id='maträtt2'>{helaListan.maträtt}</div>
                   </div>
                   <div >
