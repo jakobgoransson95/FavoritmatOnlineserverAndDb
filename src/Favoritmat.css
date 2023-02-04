@@ -269,8 +269,7 @@
   display: grid;
   grid-template-columns: 50% 50%;
   border-radius: 10px;
-  position: relative;
-  top: -65%;
+
   z-index: 1;
 }
 
