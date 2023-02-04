@@ -190,20 +190,22 @@ class Favoritmat extends React.Component {
                     <BsArrowsFullscreen className='fullscreen' id={helaListan.id}
                       onClick={this.full} />
                     {Number(RutaTaBort) === helaListan.id &&
-                      <FadeIn
-                        from="left"
-                        positionOffset={400}
-                        triggerOffset={200}
-                        delayInMilliseconds={0}
-                      >
-                        <div id='rutaTaBortPlanering'>
-                          <p id='TaBortTextPlanering' >Vill du ta bort?</p>
-                          <p onClick={this.delete}
-                            className='TaBortJaPlanering'
-                            id={helaListan.id}>Ja</p>
-                          <p onClick={this.döljTaBort}
-                            className='TaBortJaPlanering'>Nej</p>
-                        </div> </FadeIn>}
+                      // <FadeIn
+                      //   from="left"
+                      //   positionOffset={400}
+                      //   triggerOffset={200}
+                      //   delayInMilliseconds={0}
+                      // >
+                      <div id='rutaTaBortPlanering'>
+                        <p id='TaBortTextPlanering' >Vill du ta bort?</p>
+                        <p onClick={this.delete}
+                          className='TaBortJaPlanering'
+                          id={helaListan.id}>Ja</p>
+                        <p onClick={this.döljTaBort}
+                          className='TaBortJaPlanering'>Nej</p>
+                      </div>
+                      // </FadeIn>
+                    }
                     <div id='maträtt2'>{helaListan.maträtt}</div>
                   </div>
                   <div >
