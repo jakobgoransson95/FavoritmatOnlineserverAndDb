@@ -5,7 +5,7 @@ import Dexie from 'dexie';
 import { CiCircleRemove } from "react-icons/ci";
 import { BsArrowsFullscreen } from "react-icons/bs";
 import moment from 'moment/moment';
-import Slide from 'react-reveal/Slide';
+import { FadeIn } from 'react-slide-fade-in'
 
 
 export const db = new Dexie('myDatabase');
@@ -174,7 +174,12 @@ class Favoritmat extends React.Component {
           </div>}
         <div id='innerGrid'>
           {filteredRecept.map((helaListan, i) =>
-            <Slide left>
+            <FadeIn
+              from="bottom"
+              positionOffset={400}
+              triggerOffset={200}
+              delayInMilliseconds={0}
+            >
               <div className='matbox' key={i} >
                 <div className={this.state.full}>
                   <div id='removeMaträtt'> <CiCircleRemove
@@ -183,7 +188,12 @@ class Favoritmat extends React.Component {
                     className='remove' />
                     <BsArrowsFullscreen className='fullscreen' id={helaListan.id}
                       onClick={this.full} />
-                    <Slide left>
+                    <FadeIn
+                      from="bottom"
+                      positionOffset={400}
+                      triggerOffset={200}
+                      delayInMilliseconds={0}
+                    >
                       {Number(RutaTaBort) === helaListan.id &&
                         <div id='rutaTaBortPlanering'>
                           <p id='TaBortTextPlanering' >Vill du ta bort?</p>
@@ -192,7 +202,7 @@ class Favoritmat extends React.Component {
                             id={helaListan.id}>Ja</p>
                           <p onClick={this.döljTaBort}
                             className='TaBortJaPlanering'>Nej</p>
-                        </div>}</Slide>
+                        </div>}</FadeIn>
                     <div id='maträtt2'>{helaListan.maträtt}</div>
                   </div>
                   <div >
@@ -218,7 +228,7 @@ class Favoritmat extends React.Component {
                   </div>
                 </div>
               </div>
-            </Slide>
+            </FadeIn>
           )}
 
         </div>
