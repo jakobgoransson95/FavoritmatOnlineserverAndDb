@@ -89,6 +89,7 @@
   border: 1px solid;
   text-align: center;
   grid-row: 2;
+  top: 2px
 }
 
 #recept {
@@ -222,7 +223,8 @@
 .rubrikinner {
   font-weight: bold;
   margin-top: 2%;
-  font-size: 150%
+  font-size: 150%;
+  grid-row: 1;
 }
 
 #textareafull {
@@ -238,6 +240,18 @@
 }
 
 
+.star {
+  grid-row: 1;
+  justify-self: right;
+  position: absolute;
+  right: 3%;
+  top: 62%;
+  cursor: pointer;
+}
+
+#star:hover {
+  transform: scale(1.1);
+}
 
 #newdate {
   justify-self: left;
@@ -292,5 +306,51 @@
 }
 
 .TaBortJaPlanering:hover {
+  transform: scale(1.1);
+}
+
+#ratebox {
+  background: linear-gradient(89deg, #FFFFE0 0%, #d2f3dd 100%);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  height: 5em;
+  width: 90%;
+  font-size: medium;
+  display: grid;
+  grid-template-columns: auto;
+  border-radius: 10px;
+  z-index: 1;
+  position: relative;
+  left: 5%;
+}
+
+#rateRubrik {
+  grid-column: span 10;
+  grid-row: 1;
+}
+
+.starOfylld {
+  margin: 10px;
+
+}
+
+#starFylld {
+  color: yellow;
+  position: absolute;
+  top: 37.0%;
+  margin-left: 1.9%;
+  transform: scale(1.1);
+}
+
+#starBoth {
+  grid-row: 2;
+  justify-self: left;
+  width: 1vh;
+}
+
+.betygSend {
+  grid-column: span 5;
+  gap: 20%;
+  grid-row: 3;
+  cursor: pointer;
   transform: scale(1.1);
 }

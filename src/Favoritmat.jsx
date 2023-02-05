@@ -6,7 +6,12 @@ import { CiCircleRemove } from "react-icons/ci";
 import { BsArrowsFullscreen } from "react-icons/bs";
 import moment from 'moment/moment';
 import { FadeIn } from 'react-slide-fade-in';
-import { useEffect } from 'react';
+import { MdOutlineGrade } from "react-icons/Md";
+import { CiStar } from "react-icons/ci";
+import { BsStarFill } from "react-icons/bs";
+
+
+
 
 
 export const db = new Dexie('myDatabase');
@@ -26,16 +31,20 @@ class Favoritmat extends React.Component {
       recept: '',
       kommentar: '',
       namn: '',
-      betyg: '',
+      betyg: 0,
       search: '',
       RutaTaBort: '',
       fullscreen: false,
       full: '',
       fullinner: '',
       textareafull: '',
+      showbetyg: '',
+      uppdateraBetyg: 0,
+      IdState: 0,
+      starFylld: 0,
+      totalabetygpoang: 0,
       allaReceptOrg: [],
-      allaRecept: [],
-      receptId: [],
+      allaRecept: []
     }
   }
 
@@ -82,7 +91,8 @@ class Favoritmat extends React.Component {
         recept: this.state.recept,
         kommentar: this.state.kommentar,
         betyg: betyg,
-        namn: this.state.namn
+        namn: this.state.namn,
+        totalabetygpoang: betyg
       })
     })
       .then(this.setState({ add: false, prio: '' }))
@@ -107,21 +117,6 @@ class Favoritmat extends React.Component {
 
   visaTaBort = (x) => {
     this.setState({ RutaTaBort: x.target.id })
-
-
-    // this.state.allaRecept.map((list) => {
-    //   const listNr = Number(list.id)
-    //   const xNr = Number(x.target.id)
-    //   if (listNr === xNr) {
-    //     let arr = []
-    //     arr.push(list)
-    //     this.setState({
-    //       allaRecept: arr,
-    //       RutaTaBort: x.target.id
-    //     })
-    //   }
-    // })
-
   }
 
   döljTaBort = (x) => {
@@ -155,13 +150,59 @@ class Favoritmat extends React.Component {
     }
   }
 
+  rate = (x) => {
+    this.state.allaRecept.map((list) => {
+      const listNr = Number(list.id)
+      const xNr = Number(x.target.id)
+      if (listNr === xNr) {
+        const betygadd = Number(list.totalabetygpoang) + Number(this.state.starFylld) + 1
+        const antalbetyg = list.antalbetyg + 1
+        const betygDecimal = betygadd / antalbetyg
+        const nyttBetyg = Math.ceil(betygDecimal)
+        console.log(nyttBetyg, 'nyttbetyg')
+        console.log(betygadd, 'betygadd')
+        console.log(antalbetyg, 'antalbetyg')
+        this.setState({
+          uppdateraBetyg: [nyttBetyg],
+          IdState: [xNr],
+          totalabetygpoang: [betygadd]
+        })
+      }
+    })
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.uppdateraBetyg !== this.state.uppdateraBetyg) {
+      console.log(this.state.uppdateraBetyg)
+      fetch('https://node-express-verceltest-git-master-jakobgoransson95.vercel.app/updatebetyg', {
+        method: 'put',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          id: Number(this.state.IdState),
+          betyg: Number(this.state.uppdateraBetyg),
+          totalabetygpoang: Number(this.state.totalabetygpoang)
+        })
+      })
+        .catch(error => alert('API server is down'))
+        .then(this.setState({ showbetyg: false }))
+        .then(d => this.componentDidMount())
+    }
+  }
+
+  star = (x) => {
+    this.setState({
+      starFylld: x.target.id
+    })
+  }
+
   render() {
-    const { add, allaRecept, search, RutaTaBort } = this.state;
+    const { add, allaRecept, search, RutaTaBort, showbetyg, starFylld } = this.state;
     const filteredRecept = allaRecept.filter(message => {
       return message.maträtt.toLowerCase().includes(search.toLowerCase());
     });
     return (
       <div className='hela'>
+
         <div id='rubrik'><BiMessageAdd id='add' onClick={this.showBox} />
           <div id='rubriktext'>Favoritmat</div>
           <input id='serchPlanering'
@@ -200,8 +241,7 @@ class Favoritmat extends React.Component {
               from="bottom"
               positionOffset={400}
               triggerOffset={200}
-              delayInMilliseconds={0}
-            >
+              delayInMilliseconds={0}>
               <div id={helaListan.id} className='matbox' key={i} >
                 <div className={this.state.full}>
                   <div id='removeMaträtt'> <CiCircleRemove
@@ -238,7 +278,30 @@ class Favoritmat extends React.Component {
                         <textarea className='textArea' id={this.state.textareafull} value={helaListan.kommentar} readOnly={true} />
                       </div>
                       <div className='inner' id='betyginner'>
-                        <div className='rubrikinner'>Betyg</div>
+                        <div className='rubrikinner'>Betyg </div>
+                        <MdOutlineGrade className='star' onClick={(x) => this.setState({ showbetyg: x.target.id })} id={helaListan.id} />
+                        {Number(showbetyg) === helaListan.id &&
+                          <FadeIn
+                            from="right"
+                            positionOffset={400}
+                            triggerOffset={200}
+                            delayInMilliseconds={0}
+                          >
+                            <div id='ratebox'>
+                              <div id='rateRubrik'>Vad vill du ge för betyg?</div>
+                              {Array.apply(null, { length: 10 }).map((e, i) => (
+                                <div id='starBoth'>
+                                  <CiStar className='starOfylld' id={i} onClick={this.star} key={i} />
+                                  {starFylld > i - 1 &&
+                                    <BsStarFill id="starFylld" onClick={this.star} />
+                                  }
+                                </div>
+                              ))}
+                              <div id={helaListan.id} className='betygSend' onClick={this.rate}>Send </div>
+                              <div onClick={(x) => this.setState({ showbetyg: false })} id='betygSend'>Exit</div>
+                            </div>
+
+                          </FadeIn>}
                         <div id={this.state.textareafull} >{helaListan.betyg} /10</div>
                       </div>
                       <div className='inner' id='namninner'>
