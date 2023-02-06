@@ -2,7 +2,7 @@ import React from 'react';
 import './Favoritmat.css';
 import { BiMessageAdd } from "react-icons/bi";
 import Dexie from 'dexie';
-import { CiCircleRemove } from "react-icons/ci";
+import { VscTrash } from "react-icons/vsc";
 import { BsArrowsFullscreen } from "react-icons/bs";
 import moment from 'moment/moment';
 import { FadeIn } from 'react-slide-fade-in';
@@ -244,7 +244,7 @@ class Favoritmat extends React.Component {
               delayInMilliseconds={0}>
               <div id={helaListan.id} className='matbox' key={i} >
                 <div className={this.state.full}>
-                  <div id='removeMaträtt'> <CiCircleRemove
+                  <div id='removeMaträtt'> <VscTrash
                     id={helaListan.id}
                     onClick={this.visaTaBort}
                     className='remove' />
