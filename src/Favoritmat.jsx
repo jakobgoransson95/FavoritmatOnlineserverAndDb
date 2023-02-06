@@ -152,7 +152,6 @@ class Favoritmat extends React.Component {
   }
 
   rate = (x) => {
-    console.log(this.state.starFylld)
     this.state.allaRecept.map((list) => {
       const listNr = Number(list.id)
       const xNr = Number(x.target.id)
@@ -161,9 +160,6 @@ class Favoritmat extends React.Component {
         const antalbetyg = list.antalbetyg + 1
         const betygDecimal = betygadd / antalbetyg
         const nyttBetyg = Math.ceil(betygDecimal)
-        console.log(nyttBetyg, 'nyttbetyg')
-        console.log(betygadd, 'betygadd')
-        console.log(antalbetyg, 'antalbetyg')
         this.setState({
           uppdateraBetyg: nyttBetyg,
           IdState: xNr,
@@ -178,8 +174,6 @@ class Favoritmat extends React.Component {
 
     if (prevState.uppdateraBetyg !== this.state.uppdateraBetyg &&
       this.state.rateSend === true) {
-      console.log(this.state.uppdateraBetyg, 'uppdaterabetyg')
-      console.log(Number(this.state.totalabetygpoang), 'totalabetygpoang')
       fetch('https://node-express-verceltest-git-master-jakobgoransson95.vercel.app/updatebetyg', {
         method: 'put',
         headers: { 'Content-Type': 'application/json' },

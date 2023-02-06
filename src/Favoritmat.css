@@ -321,14 +321,13 @@
   background: linear-gradient(89deg, #FFFFE0 0%, #d2f3dd 100%);
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   height: 5em;
-  width: 90%;
+  width: 100%;
   font-size: medium;
   display: grid;
   grid-template-columns: auto;
   border-radius: 10px;
   z-index: 1;
   position: relative;
-  left: 5%;
 }
 
 #rateRubrik {
