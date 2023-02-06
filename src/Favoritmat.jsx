@@ -43,6 +43,7 @@ class Favoritmat extends React.Component {
       IdState: 0,
       starFylld: 0,
       totalabetygpoang: 0,
+      rateSend: false,
       allaReceptOrg: [],
       allaRecept: []
     }
@@ -151,6 +152,7 @@ class Favoritmat extends React.Component {
   }
 
   rate = (x) => {
+    console.log(this.state.starFylld)
     this.state.allaRecept.map((list) => {
       const listNr = Number(list.id)
       const xNr = Number(x.target.id)
@@ -163,17 +165,21 @@ class Favoritmat extends React.Component {
         console.log(betygadd, 'betygadd')
         console.log(antalbetyg, 'antalbetyg')
         this.setState({
-          uppdateraBetyg: [nyttBetyg],
-          IdState: [xNr],
-          totalabetygpoang: [betygadd]
+          uppdateraBetyg: nyttBetyg,
+          IdState: xNr,
+          totalabetygpoang: betygadd,
+          rateSend: true
         })
       }
     })
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevState.uppdateraBetyg !== this.state.uppdateraBetyg) {
-      console.log(this.state.uppdateraBetyg)
+
+    if (prevState.uppdateraBetyg !== this.state.uppdateraBetyg &&
+      this.state.rateSend === true) {
+      console.log(this.state.uppdateraBetyg, 'uppdaterabetyg')
+      console.log(Number(this.state.totalabetygpoang), 'totalabetygpoang')
       fetch('https://node-express-verceltest-git-master-jakobgoransson95.vercel.app/updatebetyg', {
         method: 'put',
         headers: { 'Content-Type': 'application/json' },
@@ -184,7 +190,7 @@ class Favoritmat extends React.Component {
         })
       })
         .catch(error => alert('API server is down'))
-        .then(this.setState({ showbetyg: false }))
+        .then(this.setState({ showbetyg: false, rateSend: false }))
         .then(d => this.componentDidMount())
     }
   }
@@ -298,7 +304,7 @@ class Favoritmat extends React.Component {
                                 </div>
                               ))}
                               <div id={helaListan.id} className='betygSend' onClick={this.rate}>Send </div>
-                              <div onClick={(x) => this.setState({ showbetyg: false })} id='betygSend'>Exit</div>
+                              <div onClick={(x) => this.setState({ showbetyg: false })} className='betygSend'>Exit</div>
                             </div>
 
                           </FadeIn>}

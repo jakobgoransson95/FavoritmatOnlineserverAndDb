@@ -329,16 +329,15 @@
 }
 
 .starOfylld {
-  margin: 10px;
-
+  justify-self: center;
+  top: 30%;
+  position: absolute;
 }
 
 #starFylld {
   color: yellow;
   position: absolute;
-  top: 37.0%;
-  margin-left: 1.9%;
-  transform: scale(1.1);
+  top: 30%;
 }
 
 #starBoth {
