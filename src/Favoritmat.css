@@ -119,6 +119,14 @@
   grid-row: 5;
 }
 
+#antalbetyg {
+  margin-left: 10px;
+  position: absolute;
+  top: 70%;
+  font-size: 70%;
+  font-family: sans-serif;
+}
+
 #namn {
   margin-left: 10px;
   margin-right: 10px;

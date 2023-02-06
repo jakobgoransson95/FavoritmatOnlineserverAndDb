@@ -306,9 +306,9 @@ class Favoritmat extends React.Component {
                               <div id={helaListan.id} className='betygSend' onClick={this.rate}>Send </div>
                               <div onClick={(x) => this.setState({ showbetyg: false })} className='betygSend'>Exit</div>
                             </div>
-
                           </FadeIn>}
                         <div id={this.state.textareafull} >{helaListan.betyg} /10</div>
+                        <div id='antalbetyg' >Antal betyg: {helaListan.antalbetyg}</div>
                       </div>
                       <div className='inner' id='namninner'>
                         <div className='rubrikinner'>Namn</div>
