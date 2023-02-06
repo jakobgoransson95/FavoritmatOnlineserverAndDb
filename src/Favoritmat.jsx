@@ -6,7 +6,7 @@ import { CiCircleRemove } from "react-icons/ci";
 import { BsArrowsFullscreen } from "react-icons/bs";
 import moment from 'moment/moment';
 import { FadeIn } from 'react-slide-fade-in';
-import { MdOutlineGrade } from "react-icons/Md";
+import { MdOutlineGrade } from "react-icons/md";
 import { CiStar } from "react-icons/ci";
 import { BsStarFill } from "react-icons/bs";
 
