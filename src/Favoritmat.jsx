@@ -212,14 +212,24 @@ class Favoritmat extends React.Component {
   }
 
   matTypFilter = (x) => {
-    const { allaRecept } = this.state;
     const valdMatTyp = x.value
-    const filter = allaRecept.filter(message => {
-      console.log(message)
-      message.mattyp.toLowerCase().includes(valdMatTyp.toLowerCase());
-      this.setState({ allaRecept: filter })
-    });
+    const arr = []
+    this.state.allaRecept.map((list) => {
+      if (valdMatTyp === list.mattyp) {
+        arr.push(list)
+        this.setState({ allaRecept: arr })
+      }
+    })
+
   }
+
+  closeMatTypFilter = (x) => {
+    this.setState({
+      showFilter: false,
+      allaRecept: this.state.allaReceptOrg
+    })
+  }
+
 
   render() {
     const { add, allaRecept, search, RutaTaBort, showbetyg, starFylld, showFilter } = this.state;
@@ -236,7 +246,7 @@ class Favoritmat extends React.Component {
             onChange={(x) => this.setState({ search: x.target.value })} />
           {showFilter === true &&
             <div id='filterAndClose'>
-              <AiOutlineCloseCircle id='closeFilter' onClick={(x) => this.setState({ showFilter: false })} />
+              <AiOutlineCloseCircle id='closeFilter' onClick={this.closeMatTypFilter} />
               <Select options={options} placeholder='Filtrera på typ av mat' id='matTypFilt' onChange={this.matTypFilter} />
             </div>}
         </div>
