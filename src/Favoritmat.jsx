@@ -259,7 +259,6 @@ class Favoritmat extends React.Component {
           >
             <div id='ny'>
               <div id='rubrikNy'>Lägg till ny maträtt</div>
-              <TbListSearch />
               <Select options={options} placeholder='Vilken typ av mat' id='matTyp' onChange={(x) => this.setState({ matTyp: x.value })} />
               <input id='maträtt' placeholder='Namn på maträtt' onChange={this.updateState} />
               <textarea id='recept' placeholder='Recept / länk' onChange={this.updateState} />
