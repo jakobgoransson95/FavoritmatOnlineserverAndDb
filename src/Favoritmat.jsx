@@ -9,6 +9,18 @@ import { FadeIn } from 'react-slide-fade-in';
 import { MdOutlineGrade } from "react-icons/md";
 import { CiStar } from "react-icons/ci";
 import { BsStarFill } from "react-icons/bs";
+import Select from 'react-select'
+import { TbListSearch } from "react-icons/tb";
+import { AiOutlineCloseCircle } from "react-icons/ai";
+
+
+
+const options = [
+  { value: 'Frukost', label: 'Frukost' },
+  { value: 'Middag', label: 'Middag' },
+  { value: 'Matlådemat', label: 'Matlådemat' },
+  { value: 'Mellanmål', label: 'Mellanmål' }
+]
 
 
 
@@ -28,6 +40,7 @@ class Favoritmat extends React.Component {
     this.state = {
       add: false,
       maträtt: '',
+      matTyp: '',
       recept: '',
       kommentar: '',
       namn: '',
@@ -44,6 +57,8 @@ class Favoritmat extends React.Component {
       starFylld: 0,
       totalabetygpoang: 0,
       rateSend: false,
+      filter: '',
+      showFilter: false,
       allaReceptOrg: [],
       allaRecept: []
     }
@@ -93,6 +108,7 @@ class Favoritmat extends React.Component {
         kommentar: this.state.kommentar,
         betyg: betyg,
         namn: this.state.namn,
+        mattyp: this.state.matTyp,
         totalabetygpoang: betyg
       })
     })
@@ -195,19 +211,34 @@ class Favoritmat extends React.Component {
     })
   }
 
+  matTypFilter = (x) => {
+    const { allaRecept } = this.state;
+    const valdMatTyp = x.value
+    const filter = allaRecept.filter(message => {
+      console.log(message)
+      message.mattyp.toLowerCase().includes(valdMatTyp.toLowerCase());
+      this.setState({ allaRecept: filter })
+    });
+  }
+
   render() {
-    const { add, allaRecept, search, RutaTaBort, showbetyg, starFylld } = this.state;
+    const { add, allaRecept, search, RutaTaBort, showbetyg, starFylld, showFilter } = this.state;
     const filteredRecept = allaRecept.filter(message => {
       return message.maträtt.toLowerCase().includes(search.toLowerCase());
     });
     return (
-      <div className='hela'>
-
+      <div className='hela' >
         <div id='rubrik'><BiMessageAdd id='add' onClick={this.showBox} />
           <div id='rubriktext'>Favoritmat</div>
+          <TbListSearch id='filter' onClick={(x) => this.setState({ showFilter: true })} />
           <input id='serchPlanering'
             placeholder='Sök'
             onChange={(x) => this.setState({ search: x.target.value })} />
+          {showFilter === true &&
+            <div id='filterAndClose'>
+              <AiOutlineCloseCircle id='closeFilter' onClick={(x) => this.setState({ showFilter: false })} />
+              <Select options={options} placeholder='Filtrera på typ av mat' id='matTypFilt' onChange={this.matTypFilter} />
+            </div>}
         </div>
         {add === true &&
           <FadeIn
@@ -218,6 +249,8 @@ class Favoritmat extends React.Component {
           >
             <div id='ny'>
               <div id='rubrikNy'>Lägg till ny maträtt</div>
+              <TbListSearch />
+              <Select options={options} placeholder='Vilken typ av mat' id='matTyp' onChange={(x) => this.setState({ matTyp: x.value })} />
               <input id='maträtt' placeholder='Namn på maträtt' onChange={this.updateState} />
               <textarea id='recept' placeholder='Recept / länk' onChange={this.updateState} />
               <textarea id='kommentar' placeholder='Kommentar' onChange={this.updateState} />
@@ -272,6 +305,10 @@ class Favoritmat extends React.Component {
                       <div className='inner' id='receptinner'>
                         <div className='rubrikinner'>Recept / länk</div>
                         <textarea id={this.state.textareafull} className='textArea' value={helaListan.recept} readOnly={true} />
+                      </div>
+                      <div className='inner' id='kommentarinner'>
+                        <div className='rubrikinner'>Typ av mat</div>
+                        <input className='matTyp' id={this.state.textareafull} value={helaListan.mattyp} readOnly={true} />
                       </div>
                       <div className='inner' id='kommentarinner'>
                         <div className='rubrikinner'>kommentar</div>
