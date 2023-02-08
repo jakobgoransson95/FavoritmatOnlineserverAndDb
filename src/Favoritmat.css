@@ -43,7 +43,6 @@
   transition: all 1.75s ease;
   transform: translateX(0) rotate(0deg);
   transition: all .75s ease;
-
   border-radius: 5px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
 }
@@ -99,6 +98,7 @@
   margin-right: 10px;
   text-align: center;
   grid-row: 3;
+  height: fit-content;
 }
 
 #recept {
@@ -131,7 +131,7 @@
 #antalbetyg {
   margin-left: 10px;
   position: absolute;
-  top: 70%;
+  top: 73%;
   font-size: 70%;
   font-family: sans-serif;
 }
@@ -252,7 +252,6 @@
 #textareafull {
   height: 80%;
   font-size: 150%;
-
 }
 
 .inner {
@@ -267,7 +266,7 @@
   justify-self: right;
   position: absolute;
   right: 3%;
-  top: 49%;
+  top: 67%;
   cursor: pointer;
 }
 
@@ -338,6 +337,7 @@
   grid-row: 1;
   grid-column: 2;
   margin-right: 4vh;
+  height: fit-content;
 }
 
 #filter:hover {
@@ -421,3 +421,5 @@
   cursor: pointer;
   transform: scale(1.1);
 }
+
+#react-select-3-listbox {}

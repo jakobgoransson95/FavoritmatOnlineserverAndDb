@@ -317,7 +317,7 @@ class Favoritmat extends React.Component {
                       </div>
                       <div className='inner' id='kommentarinner'>
                         <div className='rubrikinner'>Typ av mat</div>
-                        <input className='matTyp' id={this.state.textareafull} value={helaListan.mattyp} readOnly={true} />
+                        <input className='matTyp' value={helaListan.mattyp} readOnly={true} />
                       </div>
                       <div className='inner' id='kommentarinner'>
                         <div className='rubrikinner'>kommentar</div>
