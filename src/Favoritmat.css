@@ -74,6 +74,7 @@
   border-radius: 10px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
+  grid-template-rows: 5% 10% 8%
 }
 
 #rubrikNy {
@@ -99,6 +100,10 @@
   text-align: center;
   grid-row: 3;
   height: fit-content;
+}
+
+.css-13cymwt-control {
+  border-color: black;
 }
 
 #recept {
@@ -251,7 +256,7 @@
 
 #textareafull {
   height: 80%;
-  font-size: 150%;
+
 }
 
 .inner {
