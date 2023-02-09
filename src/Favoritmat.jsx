@@ -65,9 +65,6 @@ class Favoritmat extends React.Component {
     fetch('https://node-express-verceltest-git-master-jakobgoransson95.vercel.app/allinfo', {
       method: 'put',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        id: 2,
-      })
     })
       .then(response => response.json())
       .then(x => {
