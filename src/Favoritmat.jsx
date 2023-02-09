@@ -244,12 +244,18 @@ class Favoritmat extends React.Component {
           <input id='serchPlanering'
             placeholder='Sök'
             onChange={(x) => this.setState({ search: x.target.value })} />
+
+          {/* FÅ FRAM FILTRERINGSRUTAN */}
+
           {showFilter === true &&
             <div id='filterAndClose'>
               <AiOutlineCloseCircle id='closeFilter' onClick={this.closeMatTypFilter} />
               <Select options={options} placeholder='Filtrera på typ av mat' id='matTypFilt' onChange={this.matTypFilter} />
             </div>}
         </div>
+
+        {/*   NY MATRÄTT RUTA */}
+
         {add === true &&
           <FadeIn
             from="bottom"
@@ -277,6 +283,9 @@ class Favoritmat extends React.Component {
                 <span className='send' onClick={this.hideBox}>Exit</span>
               </div>
             </div></FadeIn>}
+
+        {/* LOOP IGENOM ALLA RECEPT OCH SKAPAR RECEPTKORTEN  */}
+
         <div id='innerGrid'>
           {filteredRecept.map((helaListan, i) =>
             <FadeIn
@@ -292,6 +301,9 @@ class Favoritmat extends React.Component {
                     className='remove' />
                     <BsArrowsFullscreen className='fullscreen' id={helaListan.id}
                       onClick={this.full} />
+
+                    {/* FÅ FRAM RUTAN ATT KUNNA RADERA ETT RECEPT */}
+
                     {Number(RutaTaBort) === helaListan.id &&
                       <FadeIn
                         from="left"
@@ -326,13 +338,15 @@ class Favoritmat extends React.Component {
                       <div className='inner' id='betyginner'>
                         <div className='rubrikinner'>Betyg </div>
                         <MdOutlineGrade className='star' onClick={(x) => this.setState({ showbetyg: x.target.id })} id={helaListan.id} />
+
+                        {/* FÅ FRAM RUTAN FÖR ATT KUNNA BETYGSÄTTA RECEPTET */}
+
                         {Number(showbetyg) === helaListan.id &&
                           <FadeIn
                             from="right"
                             positionOffset={400}
                             triggerOffset={200}
-                            delayInMilliseconds={0}
-                          >
+                            delayInMilliseconds={0} >
                             <div id='ratebox'>
                               <div id='rateRubrik'>Vad vill du ge för betyg?</div>
                               {Array.apply(null, { length: 10 }).map((e, i) => (
