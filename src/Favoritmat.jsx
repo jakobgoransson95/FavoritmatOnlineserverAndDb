@@ -120,6 +120,8 @@ class Favoritmat extends React.Component {
 
   updateState = (x) => {
     this.setState({ [x.target.id]: x.target.value })
+    const hej = Number(x.target.value).toFixed(0)
+    console.log(this.state.betyg)
   }
 
   delete = (x) => {
@@ -175,7 +177,7 @@ class Favoritmat extends React.Component {
         const betygadd = Number(list.totalabetygpoang) + Number(this.state.starFylld) + 1
         const antalbetyg = list.antalbetyg + 1
         const betygDecimal = betygadd / antalbetyg
-        const nyttBetyg = Math.ceil(betygDecimal)
+        const nyttBetyg = Number(betygDecimal).toFixed(0)
         this.setState({
           uppdateraBetyg: nyttBetyg,
           IdState: xNr,
@@ -269,7 +271,7 @@ class Favoritmat extends React.Component {
                 type='number'
                 min='1'
                 max='10'
-                onChange={this.updateState}
+                onChange={(x) => this.setState({ betyg: Number(x.target.value).toFixed(0) })}
               />
               <input id='namn' placeholder='Ditt namn' onChange={this.updateState} />
               <div id='välj'>
