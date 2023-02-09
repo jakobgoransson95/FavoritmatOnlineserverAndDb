@@ -224,13 +224,13 @@
   justify-self: center;
   border-radius: 10px;
   margin-top: 3px;
-  font-size: 140%;
+  font-size: 145%;
   font-weight: bold;
   font-family: Georgia, 'Times New Roman', Times, serif;
   grid-row: 1;
   grid-column: 2;
-  margin-right: 5%;
-  margin-left: 5%;
+  margin-right: 2%;
+  margin-left: 2%;
 }
 
 #gridinner {
