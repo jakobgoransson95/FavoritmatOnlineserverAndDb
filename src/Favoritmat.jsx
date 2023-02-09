@@ -120,8 +120,6 @@ class Favoritmat extends React.Component {
 
   updateState = (x) => {
     this.setState({ [x.target.id]: x.target.value })
-    const hej = Number(x.target.value).toFixed(0)
-    console.log(this.state.betyg)
   }
 
   delete = (x) => {
