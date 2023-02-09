@@ -23,9 +23,6 @@ const options = [
 ]
 
 
-
-
-
 export const db = new Dexie('myDatabase');
 db.version(4).stores({
   recept: '++id, maträtt, recept, kommentar, betyg, namn, datum', // Primary key and indexed props
