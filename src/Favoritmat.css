@@ -56,6 +56,8 @@
   grid-row: 2;
   justify-self: center;
   justify-self: left;
+  margin-top: 16%;
+  height: fit-content;
 }
 
 #add:hover {
