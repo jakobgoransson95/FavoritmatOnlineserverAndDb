@@ -1,0 +1,45 @@
+.main-nav {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  color: white;
+  font-weight: bolder;
+  font-size: 100%;
+  text-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  font-family: italy;
+  margin-left: -3vh;
+
+}
+
+
+#signup {
+  cursor: pointer;
+  display: flex;
+  grid-row: 1;
+  justify-self: left;
+}
+
+#signup:hover {
+  transform: scale(1.1);
+}
+
+#filterNavbar {
+  justify-self: left;
+  position: absolute;
+  left: 2px;
+
+}
+
+#rutaMore {
+  width: auto;
+  height: auto;
+  background-color: transparent;
+  margin-left: 6vh;
+  margin-top: 1vh;
+  border-radius: 5px;
+}
+
+#navStart {
+  right: 1vh;
+  position: absolute;
+}

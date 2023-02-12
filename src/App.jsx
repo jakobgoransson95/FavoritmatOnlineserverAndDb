@@ -1,30 +1,39 @@
-import { useState } from 'react'
+import React, { Component } from 'react';
 import './App.css'
 import Favoritmat from './Favoritmat'
-import Dexie from 'dexie';
-import { useLiveQuery } from 'dexie-react-hooks';
-
-export const db = new Dexie('myDatabase');
-db.version(4).stores({
-  recept: '++id, maträtt, recept, kommentar, betyg, namn, datum', // Primary key and indexed props
-});
+import Navbar from './Components/Navbar/Navbar';
+import Registrera from './Components/Registrera/Registrera';
+import Emaillist from './Components/Emaillista/Emaillist';
 
 
 
-function App() {
-  const [count, setCount] = useState(0)
+
+class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      route: 'signin',
+      page: 'favoritmat',
+    }
+  }
+
+  onPageChange = (x) => {
+    this.setState({ page: x })
+  }
 
 
-  const recept = useLiveQuery(
-    () => db.recept.toArray()
-  );
-
-
-  return (
-    <div className="App">
-      <Favoritmat />
-    </div>
-  )
+  render() {
+    const { page } = this.state;
+    return (
+      <div className="App">
+        <Navbar onPageChange={this.onPageChange} sida={page} />
+        {page === 'favoritmat' && <Favoritmat />}
+        {page === 'signUp' &&
+          <Registrera onPageChange={this.onPageChange} />}
+        {page === 'emailLista' && <Emaillist />}
+      </div>
+    );
+  }
 }
 
-export default App
+export default App;

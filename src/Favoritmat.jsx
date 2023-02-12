@@ -1,4 +1,5 @@
 import React from 'react';
+import 'tachyons';
 import './Favoritmat.css';
 import { BiMessageAdd } from "react-icons/bi";
 import Dexie from 'dexie';
@@ -12,6 +13,7 @@ import { BsStarFill } from "react-icons/bs";
 import Select from 'react-select'
 import { TbListSearch } from "react-icons/tb";
 import { AiOutlineCloseCircle } from "react-icons/ai";
+import { send } from 'emailjs-com';
 
 
 
@@ -57,7 +59,13 @@ class Favoritmat extends React.Component {
       filter: '',
       showFilter: false,
       allaReceptOrg: [],
-      allaRecept: []
+      allaRecept: [],
+      allaEmail: [],
+      toSend: {
+        namn: '',
+        matratt: '',
+        to_email: []
+      }
     }
   }
 
@@ -71,9 +79,32 @@ class Favoritmat extends React.Component {
         const reverseRecept = x.reverse()
         this.setState({ allaRecept: reverseRecept, allaReceptOrg: reverseRecept, show: this.state.show })
       })
+      .then(d => this.fetchUsers())
       .catch(error => alert('Server is down'))
+
   }
 
+  fetchUsers = (x) => {
+    const arr = []
+    fetch('https://node-express-verceltest-git-master-jakobgoransson95.vercel.app/users', {
+      method: 'put',
+      headers: { 'Content-Type': 'application/json' },
+    })
+      .then(response => response.json())
+      .then(x => {
+        x.map((helaListan, i) => {
+          arr.push(helaListan.email)
+        })
+        const joinedEmail = arr.join(", ")
+        this.setState({
+          toSend: {
+            ...this.state.toSend,
+            to_email: joinedEmail
+          }
+        })
+      })
+      .catch(error => alert('Server is down'))
+  }
 
   showBox = (x) => {
     this.setState({ add: true })
@@ -106,14 +137,41 @@ class Favoritmat extends React.Component {
         totalabetygpoang: betyg
       })
     })
-      .then(this.setState({ add: false, prio: '' }))
+      .then(this.setState({ add: false, prio: '', email: true }))
       .catch(error => alert('Server is down'))
-      .then(d => this.componentDidMount())
+      .then(d => this.email())
   }
 
+  email = () => {
+    const { toSend } = this.state
+    send(
+      'service_q3lnpoo',
+      'template_vnyvh0l',
+      toSend,
+      'hC1cq3MZLzYAH5lsV'
+    )
+      .then((response) => {
+        console.log('SUCCESS!', response.status, response.text);
+      })
+      .then(d => this.componentDidMount())
+      .catch((err) => {
+        console.log('FAILED...', err);
+      });
+
+  };
 
   updateState = (x) => {
-    this.setState({ [x.target.id]: x.target.value })
+    const { maträtt } = this.state
+    this.setState({
+      [x.target.id]: x.target.value
+    })
+    this.setState({
+      toSend: {
+        ...this.state.toSend,
+        [x.target.id]: x.target.value,
+        matratt: maträtt
+      }
+    })
   }
 
   delete = (x) => {
@@ -223,7 +281,6 @@ class Favoritmat extends React.Component {
       allaRecept: this.state.allaReceptOrg
     })
   }
-
 
   render() {
     const { add, allaRecept, search, RutaTaBort, showbetyg, starFylld, showFilter } = this.state;
