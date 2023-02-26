@@ -14,6 +14,7 @@ import Select from 'react-select'
 import { TbListSearch } from "react-icons/tb";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import { send } from 'emailjs-com';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 
 
@@ -282,6 +283,10 @@ class Favoritmat extends React.Component {
     })
   }
 
+  copy = (x) => {
+
+  }
+
   render() {
     const { add, allaRecept, search, RutaTaBort, showbetyg, starFylld, showFilter } = this.state;
     const filteredRecept = allaRecept.filter(message => {
@@ -374,8 +379,20 @@ class Favoritmat extends React.Component {
                   </div>
                   <div >
                     <div id={this.state.fullinner}>
+
                       <div className='inner' id='receptinner'>
-                        <div className='rubrikinner'>Recept / länk</div>
+                        <div className='rubrikinner'>
+
+                          <CopyToClipboard text={helaListan.recept}
+                            onCopy={() => this.setState({ copied: true })}>
+                            <button id='copyBtn'>Kopiera</button>
+                          </CopyToClipboard>
+
+
+
+                          Recept / länk</div>
+
+
                         <textarea id={this.state.textareafull} className='textArea' value={helaListan.recept} readOnly={true} />
                       </div>
                       <div className='inner' id='kommentarinner'>

@@ -431,4 +431,12 @@
   transform: scale(1.1);
 }
 
-#react-select-3-listbox {}
+#copyBtn {
+  font-size: 1vh;
+  position: absolute;
+  left: 3%;
+  margin-top: 1%;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
