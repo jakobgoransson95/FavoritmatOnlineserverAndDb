@@ -440,3 +440,7 @@
   border-radius: 3px;
   cursor: pointer;
 }
+
+#copyBtn:hover {
+  transform: scale(1.1);
+}
