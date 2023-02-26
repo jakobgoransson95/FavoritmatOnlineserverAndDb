@@ -51,6 +51,7 @@ class Favoritmat extends React.Component {
       full: '',
       fullinner: '',
       textareafull: '',
+      copyBtnHide: '',
       showbetyg: '',
       uppdateraBetyg: 0,
       IdState: 0,
@@ -206,6 +207,7 @@ class Favoritmat extends React.Component {
             full: 'full',
             fullinner: 'fullinner',
             textareafull: 'textareafull',
+            copyBtnHide: 'copyBtnHide'
           })
         }
       })
@@ -215,6 +217,7 @@ class Favoritmat extends React.Component {
         full: '',
         fullinner: '',
         textareafull: '',
+        copyBtnHide: ''
       })
       this.componentDidMount()
     }
@@ -283,9 +286,8 @@ class Favoritmat extends React.Component {
     })
   }
 
-  copy = (x) => {
 
-  }
+
 
   render() {
     const { add, allaRecept, search, RutaTaBort, showbetyg, starFylld, showFilter } = this.state;
@@ -385,7 +387,7 @@ class Favoritmat extends React.Component {
 
                           <CopyToClipboard text={helaListan.recept}
                             onCopy={() => this.setState({ copied: true })}>
-                            <button id='copyBtn'>Kopiera</button>
+                            <button id='copyBtn' className={this.state.copyBtnHide}>Kopiera</button>
                           </CopyToClipboard>
 
 
