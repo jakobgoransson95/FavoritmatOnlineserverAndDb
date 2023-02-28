@@ -10,6 +10,7 @@ class Emaillist extends React.Component {
     super();
     this.state = {
       emailregistrerade: '',
+      error: null
     }
   }
 
@@ -29,11 +30,20 @@ class Emaillist extends React.Component {
           emailregistrerade: joinedEmail
         })
       })
-      .catch(error => alert('Server is down'))
+      .catch(error => {
+        this.setState({ error: 'Server is down' });
+      });
   }
 
   render() {
-    const { emailregistrerade } = this.state
+    const { emailregistrerade, error } = this.state
+    if (error) {
+      return (
+        <div id='emaillist'>
+          {error}
+        </div>
+      )
+    }
     return (
       <div id='emaillist'>
         {emailregistrerade}

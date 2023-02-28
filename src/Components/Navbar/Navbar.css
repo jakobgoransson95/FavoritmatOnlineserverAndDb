@@ -42,4 +42,5 @@
 #navStart {
   right: 1vh;
   position: absolute;
+  cursor: pointer;
 }

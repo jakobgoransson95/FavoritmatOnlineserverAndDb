@@ -22,7 +22,8 @@ const options = [
   { value: 'Frukost', label: 'Frukost' },
   { value: 'Middag', label: 'Middag' },
   { value: 'Matlådemat', label: 'Matlådemat' },
-  { value: 'Mellanmål', label: 'Mellanmål' }
+  { value: 'Mellanmål', label: 'Mellanmål' },
+  { value: 'Sallad', label: 'Sallad' }
 ]
 
 
